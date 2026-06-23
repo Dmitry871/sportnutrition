@@ -1,0 +1,186 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --font-sans: var(--app-font-sans);
+  --font-serif: var(--app-font-serif);
+  --font-mono: var(--app-font-mono);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  --background: 36 33% 97%;
+  --foreground: 220 25% 12%;
+
+  --border: 30 20% 88%;
+  --input: 30 20% 88%;
+  --ring: 22 80% 50%;
+
+  --card: 0 0% 100%;
+  --card-foreground: 220 25% 12%;
+
+  --primary: 22 80% 50%;
+  --primary-foreground: 0 0% 100%;
+
+  --secondary: 38 60% 92%;
+  --secondary-foreground: 22 60% 30%;
+
+  --muted: 36 20% 93%;
+  --muted-foreground: 220 15% 45%;
+
+  --accent: 160 45% 40%;
+  --accent-foreground: 0 0% 100%;
+
+  --app-font-sans: 'Inter', system-ui, sans-serif;
+  --app-font-serif: 'Georgia', 'Times New Roman', serif;
+  --app-font-mono: 'Menlo', monospace;
+  --radius: 0.625rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .font-serif {
+    font-family: var(--app-font-serif);
+  }
+
+  .prose-article {
+    line-height: 1.85;
+    font-size: 1.0625rem;
+    color: hsl(var(--foreground));
+  }
+
+  .prose-article p {
+    margin-bottom: 1.35em;
+  }
+
+  .citation-link {
+    @apply text-primary underline underline-offset-2 decoration-dotted cursor-pointer transition-colors;
+    font-size: 0.72em;
+    vertical-align: super;
+    font-weight: 600;
+  }
+
+  .citation-link:hover {
+    @apply no-underline;
+    color: hsl(var(--accent));
+  }
+
+  .section-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: hsl(var(--primary));
+  }
+
+  .fade-in-up {
+    animation: fadeInUp 0.6s ease both;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .stagger-1 { animation-delay: 0.05s; }
+  .stagger-2 { animation-delay: 0.12s; }
+  .stagger-3 { animation-delay: 0.19s; }
+  .stagger-4 { animation-delay: 0.26s; }
+  .stagger-5 { animation-delay: 0.33s; }
+
+  .toc-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: hsl(var(--border));
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .toc-item.active .toc-dot {
+    background: hsl(var(--primary));
+    transform: scale(1.5);
+  }
+
+  .gradient-hero {
+    background: linear-gradient(
+      135deg,
+      hsl(22 80% 50% / 0.09) 0%,
+      hsl(160 45% 40% / 0.06) 50%,
+      hsl(36 33% 97%) 100%
+    );
+  }
+
+  .card-hover {
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+  }
+
+  .card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px hsl(220 25% 12% / 0.10);
+  }
+
+  .highlight-box {
+    border-left: 3px solid hsl(var(--primary));
+    background: hsl(var(--secondary));
+    border-radius: 0 var(--radius) var(--radius) 0;
+  }
+
+  .research-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 10px;
+    border-radius: 99px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    background: hsl(var(--accent) / 0.12);
+    color: hsl(var(--accent));
+  }
+}
